@@ -1,0 +1,107 @@
+{
+  "model_version": "2.0.0",
+  "algorithm": "KMeans(n_clusters=3, random_state=42, n_init=20) + StandardScaler",
+  "features": [
+    "elevation_m",
+    "soil_ph",
+    "organic_carbon",
+    "ndvi"
+  ],
+  "n_samples": 100,
+  "silhouette_score": 0.2233,
+  "legacy_5feat_silhouette": 0.1689,
+  "raw_to_canonical": {
+    "0": "A",
+    "1": "B",
+    "2": "C"
+  },
+  "feature_bounds": {
+    "elevation_m": {
+      "min": 451.0,
+      "max": 899.0,
+      "mean": 671.47,
+      "std": 131.69
+    },
+    "soil_ph": {
+      "min": 5.54,
+      "max": 6.8,
+      "mean": 6.207,
+      "std": 0.359
+    },
+    "organic_carbon": {
+      "min": 1.51,
+      "max": 3.48,
+      "mean": 2.487,
+      "std": 0.593
+    },
+    "NDVI": {
+      "min": 0.459,
+      "max": 0.887,
+      "mean": 0.697,
+      "std": 0.122
+    },
+    "area_ha": {
+      "min": 0.21,
+      "max": 2.0,
+      "mean": 1.087,
+      "std": 0.517
+    }
+  },
+  "segments": [
+    {
+      "id": "A",
+      "code": 0,
+      "name": "Zona Menengah-Netral",
+      "count": 42,
+      "description": "Lahan elevasi menengah (~654 m) dengan pH paling mendekati netral (~6,56) dan tutupan vegetasi sedang-rapat (NDVI ~0,694).",
+      "centroid": {
+        "elevation_m": 654.17,
+        "soil_ph": 6.56,
+        "organic_carbon": 2.36,
+        "ndvi": 0.694
+      },
+      "focus_recommendations": [
+        "Pertahankan pH netral dengan pemupukan berimbang dan hindari pengasaman berlebih dari urea tunggal.",
+        "Tambahkan pupuk organik/kompos saat olah tanah bila C-organik di bawah 2,5%.",
+        "Cocok untuk rotasi padi-palawija atau hortikultura (cabai/tomat) bila irigasi teknis/semi teknis tersedia."
+      ]
+    },
+    {
+      "id": "B",
+      "code": 1,
+      "name": "Zona Lereng Atas Subur & Vegetasi Rapat",
+      "count": 36,
+      "description": "Lahan dataran lebih tinggi (~764 m) dengan kandungan karbon organik tertinggi (~2,66%) dan vegetasi paling rapat (NDVI ~0,774), namun pH cenderung agak asam (~5,94).",
+      "centroid": {
+        "elevation_m": 763.89,
+        "soil_ph": 5.94,
+        "organic_carbon": 2.66,
+        "ndvi": 0.774
+      },
+      "focus_recommendations": [
+        "Terapkan pengapuran dolomit ringan sebelum tanam bila pH di bawah 6,0 untuk tanaman sensitif asam.",
+        "Manfaatkan kesuburan C-organik alami untuk tanaman tahunan/agroforestri seperti Salak Pondoh atau hortikultura dataran menengah-atas.",
+        "Terapkan terasering/mulsa organik untuk menjaga kestabilan lereng dan kelembapan tanah vulkanik."
+      ]
+    },
+    {
+      "id": "C",
+      "code": 2,
+      "name": "Zona Lereng Bawah Vegetasi Jarang",
+      "count": 22,
+      "description": "Lahan elevasi lebih rendah (~553 m) dengan kerapatan vegetasi paling rendah (NDVI ~0,577) dan tanah agak asam (~5,97).",
+      "centroid": {
+        "elevation_m": 553.27,
+        "soil_ph": 5.97,
+        "organic_carbon": 2.43,
+        "ndvi": 0.577
+      },
+      "focus_recommendations": [
+        "Prioritaskan pembenahan tanah dengan kompos matang/pupuk organik + probiotik hayati untuk meningkatkan retensi air.",
+        "Periksa ketersediaan air irigasi sebelum menanam padi; pertimbangkan jagung atau tanaman tahan kering bila tadah hujan.",
+        "Lakukan pengapuran terukur dan penanaman penutup tanah untuk menekan penguapan dan erosi."
+      ]
+    }
+  ],
+  "disclaimer": "Segmentasi bersifat eksploratif (silhouette 0,2233), bukan batas klasifikasi mutlak. Rekomendasi bersifat panduan awal sebelum verifikasi lapangan/penyuluh."
+}
