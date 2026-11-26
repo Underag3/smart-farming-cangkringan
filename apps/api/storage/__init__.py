@@ -1,0 +1,1 @@
+"""Anonymous local storage utilities."""

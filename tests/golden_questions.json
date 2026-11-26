@@ -1,0 +1,75 @@
+[
+  {
+    "id": "Q1",
+    "question": "Berapa biaya tanam padi per hektar dan rinciannya?",
+    "history": [],
+    "expected_substrings": ["14.318.434", "1.163.952", "5.063.794", "7.424.486"],
+    "expected_tool": "calculate_farming_cost"
+  },
+  {
+    "id": "Q2",
+    "question": "Kalau lahan saya cuma 0,4 hektar, berapa perkiraan modal tanam salak pondoh?",
+    "history": [],
+    "expected_substrings": ["3.759.381", "Salak Pondoh"],
+    "expected_tool": "calculate_farming_cost"
+  },
+  {
+    "id": "Q3",
+    "question": "Hama apa yang paling sering tercatat di Cangkringan, dan apakah datanya cukup untuk peringatan dini?",
+    "history": [],
+    "expected_substrings": ["Wereng", "12", "30", "tidak"],
+    "expected_tool": "get_region_or_pest_summary"
+  },
+  {
+    "id": "Q4",
+    "question": "Lahan saya elevasi 800 m, pH 5,8, NDVI 0,75, masuk segmen apa?",
+    "history": [],
+    "expected_substrings": ["Segmen B", "organic_carbon", "eksploratif"],
+    "expected_tool": "analyze_land_partial"
+  },
+  {
+    "id": "Q5",
+    "question": "Kalurahan mana yang paling banyak irigasi tadah hujan dan mana yang NDVI-nya paling rendah?",
+    "history": [],
+    "expected_substrings": ["Wukirsari", "Glagaharjo", "0.621"],
+    "expected_tool": "get_region_or_pest_summary"
+  },
+  {
+    "id": "Q6",
+    "question": "Berapa perkiraan untung panen cabai per hektar dari data Vinix?",
+    "history": [],
+    "expected_substrings": ["tidak", "Price_Data", "tidak realistis"],
+    "expected_tool": null
+  },
+  {
+    "id": "Q7",
+    "question": "Prediksikan hasil panen jagung saya bulan depan kalau curah hujan 250 mm.",
+    "history": [],
+    "expected_substrings": ["tidak membuat prediksi hasil panen", "R2"],
+    "expected_tool": null
+  },
+  {
+    "id": "Q8",
+    "question": "Siapa pemenang lomba masak atau resep soto ayam?",
+    "history": [],
+    "expected_substrings": ["tidak tersedia di basis pengetahuan", "penyuluh"],
+    "expected_tool": null
+  },
+  {
+    "id": "Q9",
+    "question": "Bagaimana cara mengatasi tanah dengan pH masam di bawah 6,0 dengan dolomit?",
+    "history": [],
+    "expected_substrings": ["dolomit", "1-3 ton/ha"],
+    "expected_tool": null
+  },
+  {
+    "id": "Q10",
+    "question": "Kalau diganti bawang merah untuk luas yang sama?",
+    "history": [
+      {"role": "user", "content": "Berapa biaya tanam salak pondoh untuk 0,4 hektar?"},
+      {"role": "assistant", "content": "Perkiraan biaya tanam Salak Pondoh untuk luas 0.4 ha adalah Rp 3.759.382."}
+    ],
+    "expected_substrings": ["Bawang Merah", "4.124.259"],
+    "expected_tool": "calculate_farming_cost"
+  }
+]
