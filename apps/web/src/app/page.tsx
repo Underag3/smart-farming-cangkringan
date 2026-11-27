@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { Suspense, useState } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { BlurReveal } from "@/components/BlurReveal";
 import { ChatAtelier } from "@/components/ChatAtelier";
+import { HeroSection } from "@/components/HeroSection";
 import { formatRupiah } from "@/lib/whatsapp";
 
 const SPACE_TABS = [
@@ -113,57 +114,12 @@ export default function HomePage() {
   const currentTab = SPACE_TABS[activeTabIdx];
 
   return (
-    <div>
-      {/* 1. Full-Viewport Editorial Hero */}
-      <section className="relative flex min-h-[calc(100vh-52px)] flex-col justify-between overflow-hidden bg-[#112617] text-[#F2EADA]">
-        <img
-          src="/images/hero-merapi.jpg"
-          alt="Lanskap pertanian terasering lereng Gunung Merapi di Cangkringan saat fajar"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#112617]/65 via-[#112617]/25 to-[#112617]/85"
-        />
+    <div className="relative">
+      {/* 1. Sticky Living Hero (covered like a sliding curtain on scroll) */}
+      <HeroSection />
 
-        {/* Top-left giant serif & right-edge vertical display */}
-        <div className="relative z-10 flex items-start justify-between px-5 pt-7 md:px-10 md:pt-8">
-          <BlurReveal immediate y={16}>
-            <h1 className="font-serif text-[44px] font-light uppercase leading-none tracking-[-0.02em] text-[#F2EADA] drop-shadow-sm sm:text-6xl md:text-[78px]">
-              TANICERDAS
-            </h1>
-          </BlurReveal>
-          <p className="vertical-display font-serif text-[26px] font-light uppercase leading-none tracking-[0.06em] text-[#F2EADA]/95 sm:text-4xl md:text-[56px]">
-            CANGKRINGAN
-          </p>
-        </div>
-
-        {/* Lower hero editorial statement + dual CTA + scroll indicator */}
-        <div className="relative z-10 flex flex-col justify-between gap-8 px-5 pb-8 md:flex-row md:items-end md:px-10 md:pb-10">
-          <BlurReveal immediate delay={0.12} className="md:ml-[24%] max-w-md">
-            <p className="font-serif text-3xl font-light leading-[1.15] text-[#F2EADA] md:text-[42px]">
-              Memahami Lahan Merapi, Menanam Lebih Terukur
-            </p>
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
-              <Link href="/analisis-lahan" className="btn-drs-primary">
-                Cek Lahan Anda
-              </Link>
-              <a href="#tanya-tani" className="btn-drs-dashed-light">
-                Tanya Asisten AI
-              </a>
-            </div>
-          </BlurReveal>
-
-          <a
-            href="#cerita-lahan"
-            className="inline-flex items-center gap-3 self-end text-xs tracking-wide text-[#F2EADA]/90 hover:text-[#F2EADA]"
-          >
-            <span>Gulir untuk jelajahi</span>
-            <ArrowDown className="h-4 w-4 arrows-bounce" />
-          </a>
-        </div>
-      </section>
-
+      {/* Sliding Curtain Wrapper */}
+      <div className="relative z-10 bg-[#DFD7C9] shadow-[0_-24px_64px_rgba(17,38,23,0.42)]">
       {/* 2. The Story / Konteks Wilayah (#DFD7C9) */}
       <section id="cerita-lahan" className="bg-[#DFD7C9] px-5 pt-24 pb-16 md:px-10 md:pt-32 md:pb-20">
         <div className="mx-auto max-w-6xl">
@@ -639,6 +595,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      </div>
     </div>
   );
 }

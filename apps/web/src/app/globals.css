@@ -36,7 +36,7 @@
     color: var(--ink-charcoal);
     font-size: 16px;
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   button,
@@ -103,4 +103,97 @@
 
 .media-blur-enter {
   animation: media-blur-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes hero-kenburns {
+  0% {
+    transform: scale(1.03) translate3d(0%, 0%, 0);
+  }
+  50% {
+    transform: scale(1.09) translate3d(-1.5%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.05) translate3d(1.2%, -0.5%, 0);
+  }
+}
+
+@keyframes mist-drift-right {
+  0% {
+    transform: translate3d(-14%, 0px, 0) scale(1);
+    opacity: 0.36;
+  }
+  50% {
+    transform: translate3d(8%, -8px, 0) scale(1.06);
+    opacity: 0.56;
+  }
+  100% {
+    transform: translate3d(-14%, 0px, 0) scale(1);
+    opacity: 0.36;
+  }
+}
+
+@keyframes mist-drift-left {
+  0% {
+    transform: translate3d(12%, 4px, 0) scale(1.04);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate3d(-12%, -6px, 0) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(12%, 4px, 0) scale(1.04);
+    opacity: 0.3;
+  }
+}
+
+@keyframes crater-plume {
+  0% {
+    transform: translate3d(-10px, 14px, 0) scale(0.92);
+    opacity: 0.2;
+  }
+  45% {
+    transform: translate3d(26px, -16px, 0) scale(1.16);
+    opacity: 0.58;
+  }
+  100% {
+    transform: translate3d(58px, -42px, 0) scale(1.32);
+    opacity: 0;
+  }
+}
+
+.hero-kenburns {
+  animation: hero-kenburns 26s ease-in-out infinite;
+  will-change: transform;
+}
+
+.mist-layer-a {
+  animation: mist-drift-right 24s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.mist-layer-b {
+  animation: mist-drift-left 30s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.crater-plume-a {
+  animation: crater-plume 14s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+.crater-plume-b {
+  animation: crater-plume 14s ease-out 7s infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns,
+  .mist-layer-a,
+  .mist-layer-b,
+  .crater-plume-a,
+  .crater-plume-b,
+  .arrows-bounce {
+    animation: none !important;
+  }
 }
