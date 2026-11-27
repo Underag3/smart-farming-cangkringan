@@ -6,17 +6,16 @@ import { ArrowDown } from "lucide-react";
 import { BlurReveal } from "@/components/BlurReveal";
 
 export function HeroSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
     const media = mediaRef.current;
     const content = contentRef.current;
     const veil = veilRef.current;
-    if (!section || !media || !content || !veil) return;
+    const curtain = document.getElementById("curtain-content");
+    if (!media || !content || !veil || !curtain) return;
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -31,23 +30,23 @@ export function HeroSection() {
         import("gsap"),
         import("gsap/ScrollTrigger"),
       ]);
-      if (!active || !sectionRef.current) return;
+      if (!active || !mediaRef.current) return;
 
       gsap.registerPlugin(ScrollTrigger);
       const ctx = gsap.context(() => {
         const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "+=100%",
+            trigger: curtain,
+            start: "top bottom",
+            end: "top top",
             scrub: true,
           },
         });
 
-        tl.to(media, { yPercent: 10, scale: 1.04, ease: "none" }, 0)
-          .to(content, { y: -36, opacity: 0.35, ease: "none" }, 0)
-          .to(veil, { opacity: 0.58, ease: "none" }, 0);
-      }, sectionRef);
+        tl.to(media, { yPercent: 8, scale: 1.03, ease: "none" }, 0)
+          .to(content, { y: -32, opacity: 0.35, ease: "none" }, 0)
+          .to(veil, { opacity: 0.55, ease: "none" }, 0);
+      });
 
       revertCtx = () => ctx.revert();
     }
@@ -61,10 +60,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="sticky top-[56px] z-0 h-[calc(100vh-56px)] w-full overflow-hidden bg-[#112617] text-[#F2EADA] md:top-[50px] md:h-[calc(100vh-50px)]"
-    >
+    <section className="sticky top-[56px] z-0 h-[calc(100vh-56px)] w-full overflow-hidden bg-[#112617] text-[#F2EADA] md:top-[50px] md:h-[calc(100vh-50px)]">
       {/* Moving Landscape Layer */}
       <div
         ref={mediaRef}
@@ -77,37 +73,37 @@ export function HeroSection() {
           className="hero-kenburns h-full w-full object-cover"
         />
 
-        {/* Merapi Summit Drifting Plume / Asap Kawah (aligned near upper-left peak) */}
+        {/* Localized Merapi Summit Plume / Asap Kawah (subtle, does not wash out hills) */}
         <div
-          className="crater-plume-a absolute left-[24%] top-[6%] h-40 w-64 rounded-full blur-2xl md:h-52 md:w-80"
+          className="crater-plume-a absolute left-[25%] top-[5%] h-24 w-44 rounded-full mix-blend-screen blur-2xl md:h-28 md:w-52"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(242, 234, 218, 0.55) 0%, rgba(223, 215, 201, 0.24) 45%, transparent 75%)",
+              "radial-gradient(ellipse at center, rgba(235, 240, 238, 0.38) 0%, rgba(220, 226, 224, 0.14) 50%, transparent 78%)",
           }}
         />
         <div
-          className="crater-plume-b absolute left-[26%] top-[8%] h-36 w-56 rounded-full blur-2xl md:h-48 md:w-72"
+          className="crater-plume-b absolute left-[27%] top-[7%] h-20 w-40 rounded-full mix-blend-screen blur-2xl md:h-24 md:w-48"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(242, 234, 218, 0.48) 0%, rgba(223, 215, 201, 0.18) 50%, transparent 75%)",
-          }}
-        />
-
-        {/* Valley Morning Mist Layer A (drifting right) */}
-        <div
-          className="mist-layer-a absolute -left-[15%] top-[34%] h-44 w-[130%] blur-3xl md:h-56"
-          style={{
-            background:
-              "radial-gradient(ellipse 38% 60% at 28% 50%, rgba(242, 234, 218, 0.42) 0%, transparent 70%), radial-gradient(ellipse 42% 65% at 72% 45%, rgba(223, 215, 201, 0.36) 0%, transparent 72%)",
+              "radial-gradient(ellipse at center, rgba(235, 240, 238, 0.32) 0%, rgba(220, 226, 224, 0.10) 52%, transparent 78%)",
           }}
         />
 
-        {/* Valley Morning Mist Layer B (drifting left across terraces) */}
+        {/* Subtle Drifting Valley Mist Ribbon A */}
         <div
-          className="mist-layer-b absolute -left-[15%] top-[48%] h-48 w-[130%] blur-3xl md:h-64"
+          className="mist-layer-a absolute -left-[10%] top-[38%] h-24 w-[120%] mix-blend-screen blur-2xl md:h-28"
           style={{
             background:
-              "radial-gradient(ellipse 40% 60% at 45% 55%, rgba(242, 234, 218, 0.34) 0%, transparent 72%), radial-gradient(ellipse 35% 55% at 84% 50%, rgba(223, 215, 201, 0.30) 0%, transparent 70%)",
+              "radial-gradient(ellipse 32% 55% at 32% 50%, rgba(232, 238, 234, 0.22) 0%, transparent 72%), radial-gradient(ellipse 36% 55% at 72% 48%, rgba(232, 238, 234, 0.18) 0%, transparent 72%)",
+          }}
+        />
+
+        {/* Subtle Drifting Valley Mist Ribbon B */}
+        <div
+          className="mist-layer-b absolute -left-[10%] top-[48%] h-24 w-[120%] mix-blend-screen blur-2xl md:h-28"
+          style={{
+            background:
+              "radial-gradient(ellipse 34% 50% at 52% 50%, rgba(232, 238, 234, 0.18) 0%, transparent 72%)",
           }}
         />
       </div>

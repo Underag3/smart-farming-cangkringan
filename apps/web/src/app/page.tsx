@@ -119,7 +119,10 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Sliding Curtain Wrapper */}
-      <div className="relative z-10 bg-[#DFD7C9] shadow-[0_-24px_64px_rgba(17,38,23,0.42)]">
+      <div
+        id="curtain-content"
+        className="relative z-10 bg-[#DFD7C9] shadow-[0_-24px_64px_rgba(17,38,23,0.42)]"
+      >
       {/* 2. The Story / Konteks Wilayah (#DFD7C9) */}
       <section id="cerita-lahan" className="bg-[#DFD7C9] px-5 pt-24 pb-16 md:px-10 md:pt-32 md:pb-20">
         <div className="mx-auto max-w-6xl">
@@ -162,47 +165,53 @@ export default function HomePage() {
           </BlurReveal>
 
           <div className="mt-12 grid grid-cols-1 items-center gap-6 md:grid-cols-3">
-            <BlurReveal delay={0.05} className="md:translate-y-4">
+            <div className="md:translate-y-4">
               <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#F2EADA]">
-                <img
-                  src="/images/segmen-a-padi.jpg"
-                  alt="Persawahan beririgasi teknis Cangkringan"
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover"
-                />
+                <div className="bg-[#112617]">
+                  <img
+                    src="/images/segmen-a-padi.jpg"
+                    alt="Persawahan beririgasi teknis Cangkringan"
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                </div>
                 <p className="px-4 py-3 text-xs uppercase tracking-[0.1em] text-[#5C584F]">
                   Zona Menengah · Irigasi Teknis
                 </p>
               </div>
-            </BlurReveal>
+            </div>
 
-            <BlurReveal delay={0.12} className="md:-translate-y-4">
+            <div className="md:-translate-y-4">
               <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#F2EADA]">
-                <img
-                  src="/images/segmen-b-salak.jpg"
-                  alt="Kebun Salak Pondoh lereng atas Merapi"
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover"
-                />
+                <div className="bg-[#112617]">
+                  <img
+                    src="/images/segmen-b-salak.jpg"
+                    alt="Kebun Salak Pondoh lereng atas Merapi"
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                </div>
                 <p className="px-4 py-3 text-xs uppercase tracking-[0.1em] text-[#5C584F]">
                   Lereng Atas · Salak Pondoh &amp; C-Organik Tinggi
                 </p>
               </div>
-            </BlurReveal>
+            </div>
 
-            <BlurReveal delay={0.18} className="md:translate-y-4">
+            <div className="md:translate-y-4">
               <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#F2EADA]">
-                <img
-                  src="/images/segmen-c-palawija.jpg"
-                  alt="Lahan kering terasering palawija dan hortikultura"
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover"
-                />
+                <div className="bg-[#112617]">
+                  <img
+                    src="/images/segmen-c-palawija.jpg"
+                    alt="Lahan kering terasering palawija dan hortikultura"
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+                </div>
                 <p className="px-4 py-3 text-xs uppercase tracking-[0.1em] text-[#5C584F]">
                   Lereng Bawah · Pembenahan Organik &amp; Mulsa
                 </p>
               </div>
-            </BlurReveal>
+            </div>
           </div>
         </div>
       </section>
@@ -257,13 +266,12 @@ export default function HomePage() {
             key={currentTab.id}
             className="media-blur-enter relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.18)] bg-[#F2EADA] md:min-h-[600px]"
           >
-            <div className="relative h-64 w-full overflow-hidden md:h-72">
+            <div className="relative h-64 w-full overflow-hidden bg-[#112617] md:h-72">
               <img
                 src={currentTab.image}
                 alt={currentTab.imageAlt}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#F2EADA] to-transparent" />
             </div>
 
             <div className="flex flex-1 flex-col justify-between p-6 pt-2 md:p-8 md:pt-2">
@@ -362,11 +370,11 @@ export default function HomePage() {
 
           <div className="mt-14 border-t border-[rgba(48,48,48,0.2)]">
             {FEATURED_CROPS.map((crop) => (
-              <BlurReveal
+              <div
                 key={crop.name}
                 className="grid grid-cols-1 gap-8 border-b border-[rgba(48,48,48,0.2)] py-10 md:grid-cols-12 md:items-center"
               >
-                <div className="flex flex-col justify-between md:col-span-6">
+                <BlurReveal className="flex flex-col justify-between md:col-span-6">
                   <div>
                     <h3 className="font-serif text-3xl font-light text-[#303030] md:text-4xl">
                       {crop.name}
@@ -407,10 +415,10 @@ export default function HomePage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </BlurReveal>
 
                 <div className="md:col-span-6">
-                  <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)]">
+                  <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#112617]">
                     <img
                       src={crop.image}
                       alt={crop.imageAlt}
@@ -419,7 +427,7 @@ export default function HomePage() {
                     />
                   </div>
                 </div>
-              </BlurReveal>
+              </div>
             ))}
           </div>
         </div>

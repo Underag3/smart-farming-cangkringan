@@ -91,73 +91,71 @@
 @keyframes media-blur-in {
   from {
     opacity: 0;
-    filter: blur(10px);
-    transform: scale(1.015);
+    filter: blur(8px);
   }
   to {
     opacity: 1;
-    filter: blur(0px);
-    transform: scale(1);
+    filter: none;
   }
 }
 
 .media-blur-enter {
-  animation: media-blur-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: media-blur-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes hero-kenburns {
   0% {
-    transform: scale(1.03) translate3d(0%, 0%, 0);
+    transform: scale(1.02) translate3d(0%, 0%, 0);
   }
   50% {
-    transform: scale(1.09) translate3d(-1.5%, -1%, 0);
+    transform: scale(1.07) translate3d(-1.2%, -0.8%, 0);
   }
   100% {
-    transform: scale(1.05) translate3d(1.2%, -0.5%, 0);
+    transform: scale(1.04) translate3d(1%, -0.4%, 0);
   }
 }
 
 @keyframes mist-drift-right {
   0% {
-    transform: translate3d(-14%, 0px, 0) scale(1);
-    opacity: 0.36;
+    transform: translate3d(-12%, 0px, 0) scale(1);
+    opacity: 0.28;
   }
   50% {
-    transform: translate3d(8%, -8px, 0) scale(1.06);
-    opacity: 0.56;
+    transform: translate3d(10%, -6px, 0) scale(1.05);
+    opacity: 0.45;
   }
   100% {
-    transform: translate3d(-14%, 0px, 0) scale(1);
-    opacity: 0.36;
+    transform: translate3d(-12%, 0px, 0) scale(1);
+    opacity: 0.28;
   }
 }
 
 @keyframes mist-drift-left {
   0% {
-    transform: translate3d(12%, 4px, 0) scale(1.04);
-    opacity: 0.3;
+    transform: translate3d(10%, 3px, 0) scale(1.03);
+    opacity: 0.22;
   }
   50% {
-    transform: translate3d(-12%, -6px, 0) scale(1);
-    opacity: 0.5;
+    transform: translate3d(-10%, -5px, 0) scale(1);
+    opacity: 0.38;
   }
   100% {
-    transform: translate3d(12%, 4px, 0) scale(1.04);
-    opacity: 0.3;
+    transform: translate3d(10%, 3px, 0) scale(1.03);
+    opacity: 0.22;
   }
 }
 
 @keyframes crater-plume {
   0% {
-    transform: translate3d(-10px, 14px, 0) scale(0.92);
-    opacity: 0.2;
+    transform: translate3d(-8px, 10px, 0) scale(0.92);
+    opacity: 0.16;
   }
   45% {
-    transform: translate3d(26px, -16px, 0) scale(1.16);
-    opacity: 0.58;
+    transform: translate3d(22px, -14px, 0) scale(1.14);
+    opacity: 0.46;
   }
   100% {
-    transform: translate3d(58px, -42px, 0) scale(1.32);
+    transform: translate3d(52px, -38px, 0) scale(1.3);
     opacity: 0;
   }
 }
