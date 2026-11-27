@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface BlurRevealProps {
   children: React.ReactNode;
@@ -25,52 +23,71 @@ export function BlurReveal({
     const el = ref.current;
     if (!el) return;
 
-    gsap.registerPlugin(ScrollTrigger);
+    let active = true;
+    let revertCtx: (() => void) | null = null;
+
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-
     if (prefersReduced) {
-      gsap.set(el, { opacity: 1, filter: "blur(0px)", y: 0 });
+      el.style.opacity = "1";
+      el.style.filter = "blur(0px)";
+      el.style.transform = "none";
       return;
     }
 
-    const ctx = gsap.context(() => {
-      if (immediate) {
-        gsap.fromTo(
-          el,
-          { opacity: 0, filter: "blur(10px)", y },
-          {
-            opacity: 1,
-            filter: "blur(0px)",
-            y: 0,
-            duration: 0.9,
-            delay,
-            ease: "power3.out",
-          }
-        );
-      } else {
-        gsap.fromTo(
-          el,
-          { opacity: 0, filter: "blur(10px)", y },
-          {
-            opacity: 1,
-            filter: "blur(0px)",
-            y: 0,
-            duration: 0.85,
-            delay,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 88%",
-              once: true,
-            },
-          }
-        );
-      }
-    }, ref);
+    async function runAnimation() {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+      if (!active || !ref.current) return;
 
-    return () => ctx.revert();
+      gsap.registerPlugin(ScrollTrigger);
+      const ctx = gsap.context(() => {
+        if (immediate) {
+          gsap.fromTo(
+            el,
+            { opacity: 0, filter: "blur(10px)", y },
+            {
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+              duration: 0.85,
+              delay,
+              ease: "power3.out",
+            }
+          );
+        } else {
+          gsap.fromTo(
+            el,
+            { opacity: 0, filter: "blur(10px)", y },
+            {
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+              duration: 0.85,
+              delay,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 88%",
+                once: true,
+              },
+            }
+          );
+        }
+      }, ref);
+
+      revertCtx = () => ctx.revert();
+    }
+
+    runAnimation().catch(() => {});
+
+    return () => {
+      active = false;
+      if (revertCtx) revertCtx();
+    };
   }, [delay, y, immediate]);
 
   return (

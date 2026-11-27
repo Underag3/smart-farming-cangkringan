@@ -12,6 +12,8 @@ const SPACE_TABS = [
     id: "seg-a",
     label: "SEGMEN A · NETRAL",
     subtitle: "42 Lahan · Zona Menengah-Netral",
+    image: "/images/segmen-a-padi.jpg",
+    imageAlt: "Persawahan padi bertingkat dengan saluran irigasi batu di lereng Merapi",
     description:
       "Elevasi rata-rata 654,2 m dengan pH paling mendekati netral (6,56), C-organik 2,36%, dan NDVI 0,694. Mendukung rotasi padi-palawija atau hortikultura saat air tersedia.",
     metrics: [
@@ -27,6 +29,8 @@ const SPACE_TABS = [
     id: "seg-b",
     label: "SEGMEN B · LERENG ATAS",
     subtitle: "36 Lahan · Subur & Vegetasi Rapat",
+    image: "/images/segmen-b-salak.jpg",
+    imageAlt: "Kebun Salak Pondoh rapat di tanah vulkanik lereng Merapi",
     description:
       "Elevasi rata-rata 763,9 m dengan karbon organik tertinggi (2,66%) dan kanopi terapat (NDVI 0,774), namun pH cenderung agak asam (5,94). Cocok untuk Salak Pondoh dan konservasi lereng.",
     metrics: [
@@ -42,6 +46,8 @@ const SPACE_TABS = [
     id: "seg-c",
     label: "SEGMEN C · VEGETASI JARANG",
     subtitle: "22 Lahan · Lereng Bawah",
+    image: "/images/segmen-c-palawija.jpg",
+    imageAlt: "Lahan kering terasering dengan mulsa jerami dan tanaman jagung cabai",
     description:
       "Elevasi rata-rata 553,3 m dengan NDVI terendah (0,577) dan pH 5,97. Prioritaskan kompos matang/probiotik hayati dan sesuaikan komoditas dengan tipe irigasi.",
     metrics: [
@@ -57,6 +63,8 @@ const SPACE_TABS = [
     id: "kalurahan",
     label: "5 KALURAHAN MERAPI",
     subtitle: "100 Lahan · Total 108,7 Hektar",
+    image: "/images/hero-merapi.jpg",
+    imageAlt: "Lanskap lima kalurahan Cangkringan berlatar Gunung Merapi",
     description:
       "Mencakup Umbulharjo (26), Argomulyo (24), Wukirsari (18), Glagaharjo (17 — NDVI terendah 0,621), dan Kepuharjo (15 — NDVI tertinggi 0,743). Seluruhnya tanah Regosol Vulkanik Merapi.",
     metrics: [
@@ -75,6 +83,8 @@ const FEATURED_CROPS = [
     name: "Padi Sawah",
     variety: "IR64",
     costPerHa: 14318434,
+    image: "/images/segmen-a-padi.jpg",
+    imageAlt: "Hamparan sawah padi beririgasi di lereng Merapi",
     summary:
       "Menyerap porsi tenaga kerja terbesar (51,9% dari modal per ha). Memerlukan irigasi teknis/semi teknis dan pengendalian preventif hama Wereng (12 dari 30 catatan hama).",
   },
@@ -82,6 +92,8 @@ const FEATURED_CROPS = [
     name: "Salak Pondoh",
     variety: "Pondoh Sleman",
     costPerHa: 9398454,
+    image: "/images/segmen-b-salak.jpg",
+    imageAlt: "Rumpun Salak Pondoh Sleman dengan tandan buah di tanah vulkanik",
     summary:
       "Komoditas unggulan lereng Merapi dengan biaya per hektar paling efisien di dataset. Sangat adaptif pada pH agak asam (5,5–6,5) dengan pupuk kandang/kompos dan probiotik.",
   },
@@ -89,6 +101,8 @@ const FEATURED_CROPS = [
     name: "Jagung & Hortikultura",
     variety: "Bisi 18 / Keriting Lokal / Servo / Tajuk",
     costPerHa: 11009217,
+    image: "/images/crop-hortikultura.jpg",
+    imageAlt: "Hasil panen bawang merah, cabai merah, dan kompos organik di keranjang bambu",
     summary:
       "Alternatif rotasi palawija dan hortikultura (Jagung Rp 11,01 jt, Bawang Merah Rp 10,31 jt, Cabai Merah Rp 10,28 jt, Tomat Rp 9,85 jt per ha) sesuai elevasi dan ketersediaan air.",
   },
@@ -100,45 +114,26 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* 1. Full-Viewport Hero */}
-      <section className="relative flex min-h-[calc(100vh-56px)] flex-col justify-between overflow-hidden bg-[#112617] text-[#F2EADA]">
-        {/* Atmospheric Volcanic Slope SVG & Radial Gradient Background */}
+      {/* 1. Full-Viewport Editorial Hero */}
+      <section className="relative flex min-h-[calc(100vh-52px)] flex-col justify-between overflow-hidden bg-[#112617] text-[#F2EADA]">
+        <img
+          src="/images/hero-merapi.jpg"
+          alt="Lanskap pertanian terasering lereng Gunung Merapi di Cangkringan saat fajar"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at 65% 28%, rgba(47, 89, 58, 0.72) 0%, rgba(26, 56, 34, 0.88) 48%, rgba(17, 38, 23, 0.98) 100%)",
-          }}
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#112617]/65 via-[#112617]/25 to-[#112617]/85"
         />
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 760"
-          preserveAspectRatio="xMidYMax slice"
-          className="pointer-events-none absolute inset-0 h-full w-full opacity-35"
-        >
-          <path
-            d="M0,620 Q320,420 680,520 T1440,460 L1440,760 L0,760 Z"
-            fill="#20462B"
-          />
-          <path
-            d="M0,690 Q480,530 920,610 T1440,560 L1440,760 L0,760 Z"
-            fill="#17321E"
-          />
-          <path
-            d="M220,490 L520,250 L820,490 Z"
-            fill="rgba(242, 234, 218, 0.06)"
-          />
-        </svg>
 
         {/* Top-left giant serif & right-edge vertical display */}
         <div className="relative z-10 flex items-start justify-between px-5 pt-7 md:px-10 md:pt-8">
           <BlurReveal immediate y={16}>
-            <h1 className="font-serif text-[44px] font-light uppercase leading-none tracking-[-0.02em] text-[#F2EADA] sm:text-6xl md:text-[78px]">
+            <h1 className="font-serif text-[44px] font-light uppercase leading-none tracking-[-0.02em] text-[#F2EADA] drop-shadow-sm sm:text-6xl md:text-[78px]">
               TANICERDAS
             </h1>
           </BlurReveal>
-          <p className="vertical-display font-serif text-[26px] font-light uppercase leading-none tracking-[0.06em] text-[#F2EADA]/90 sm:text-4xl md:text-[56px]">
+          <p className="vertical-display font-serif text-[26px] font-light uppercase leading-none tracking-[0.06em] text-[#F2EADA]/95 sm:text-4xl md:text-[56px]">
             CANGKRINGAN
           </p>
         </div>
@@ -161,7 +156,7 @@ export default function HomePage() {
 
           <a
             href="#cerita-lahan"
-            className="inline-flex items-center gap-3 self-end text-xs tracking-wide text-[#F2EADA]/85 hover:text-[#F2EADA]"
+            className="inline-flex items-center gap-3 self-end text-xs tracking-wide text-[#F2EADA]/90 hover:text-[#F2EADA]"
           >
             <span>Gulir untuk jelajahi</span>
             <ArrowDown className="h-4 w-4 arrows-bounce" />
@@ -170,7 +165,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. The Story / Konteks Wilayah (#DFD7C9) */}
-      <section id="cerita-lahan" className="bg-[#DFD7C9] px-5 py-24 md:px-10 md:py-32">
+      <section id="cerita-lahan" className="bg-[#DFD7C9] px-5 pt-24 pb-16 md:px-10 md:pt-32 md:pb-20">
         <div className="mx-auto max-w-6xl">
           <div className="md:ml-[24%] max-w-2xl">
             <BlurReveal>
@@ -193,11 +188,74 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 2B. Three-Photo Staggered Showcase (Inspired by "The House Awaits") */}
+      <section className="bg-[#DFD7C9] px-5 pb-24 pt-8 md:px-10 md:pb-32">
+        <div className="mx-auto max-w-7xl">
+          <BlurReveal className="text-center">
+            <p className="eyebrow-tag">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#303030]" />
+              <span>Lanskap Agro-Ekologi</span>
+            </p>
+            <h2 className="mt-3 font-serif text-4xl font-light uppercase leading-tight text-[#303030] md:text-5xl">
+              Tiga Wajah Lahan Merapi
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-sm text-[#5C584F]">
+              Dari sawah beririgasi teknis, kebun Salak Pondoh lereng atas,
+              hingga lahan tadah hujan di lima kalurahan Cangkringan.
+            </p>
+          </BlurReveal>
+
+          <div className="mt-12 grid grid-cols-1 items-center gap-6 md:grid-cols-3">
+            <BlurReveal delay={0.05} className="md:translate-y-4">
+              <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#F2EADA]">
+                <img
+                  src="/images/segmen-a-padi.jpg"
+                  alt="Persawahan beririgasi teknis Cangkringan"
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+                <p className="px-4 py-3 text-xs uppercase tracking-[0.1em] text-[#5C584F]">
+                  Zona Menengah · Irigasi Teknis
+                </p>
+              </div>
+            </BlurReveal>
+
+            <BlurReveal delay={0.12} className="md:-translate-y-4">
+              <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#F2EADA]">
+                <img
+                  src="/images/segmen-b-salak.jpg"
+                  alt="Kebun Salak Pondoh lereng atas Merapi"
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+                <p className="px-4 py-3 text-xs uppercase tracking-[0.1em] text-[#5C584F]">
+                  Lereng Atas · Salak Pondoh &amp; C-Organik Tinggi
+                </p>
+              </div>
+            </BlurReveal>
+
+            <BlurReveal delay={0.18} className="md:translate-y-4">
+              <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)] bg-[#F2EADA]">
+                <img
+                  src="/images/segmen-c-palawija.jpg"
+                  alt="Lahan kering terasering palawija dan hortikultura"
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+                <p className="px-4 py-3 text-xs uppercase tracking-[0.1em] text-[#5C584F]">
+                  Lereng Bawah · Pembenahan Organik &amp; Mulsa
+                </p>
+              </div>
+            </BlurReveal>
+          </div>
+        </div>
+      </section>
+
       {/* 3. Interactive 50/50 Split Panel ("How the Space Is Lived In") */}
       <section className="bg-[#DFD7C9] px-4 pb-20 md:px-8 md:pb-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-2">
           {/* Left Dark Forest Green Tab Selector */}
-          <div className="flex min-h-[480px] flex-col justify-between rounded-[6px] bg-[#20462B] p-6 text-[#F2EADA] md:min-h-[580px] md:p-10">
+          <div className="flex min-h-[480px] flex-col justify-between rounded-[6px] bg-[#20462B] p-6 text-[#F2EADA] md:min-h-[600px] md:p-10">
             <div>
               <h2 className="font-serif text-3xl font-light leading-tight md:text-4xl">
                 Bagaimana Lahan
@@ -238,49 +296,60 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Right Soft Ivory Detail Panel with Blur Crossfade */}
+          {/* Right Photographic + Metrics Overlay Panel with Blur Crossfade */}
           <div
             key={currentTab.id}
-            className="media-blur-enter flex min-h-[420px] flex-col justify-between rounded-[6px] border border-[rgba(48,48,48,0.18)] bg-[#F2EADA] p-6 md:min-h-[580px] md:p-10"
+            className="media-blur-enter relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.18)] bg-[#F2EADA] md:min-h-[600px]"
           >
-            <div>
-              <p className="eyebrow-tag">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#20462B]" />
-                <span>Profil Terverifikasi</span>
-              </p>
-              <h3 className="mt-4 font-serif text-3xl font-light text-[#303030] md:text-4xl">
-                {currentTab.subtitle}
-              </h3>
-
-              <div className="mt-8 grid grid-cols-2 border-t border-[rgba(48,48,48,0.18)]">
-                {currentTab.metrics.map((m, i) => (
-                  <div
-                    key={m.k}
-                    className={`border-b border-[rgba(48,48,48,0.18)] py-5 ${
-                      i % 2 === 0
-                        ? "pr-4 border-r border-[rgba(48,48,48,0.18)]"
-                        : "pl-5"
-                    }`}
-                  >
-                    <p className="text-xs uppercase tracking-[0.1em] text-[#5C584F]">
-                      {m.k}
-                    </p>
-                    <p className="mt-1.5 font-serif text-2xl font-normal text-[#20462B] md:text-3xl">
-                      {m.v}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <div className="relative h-64 w-full overflow-hidden md:h-72">
+              <img
+                src={currentTab.image}
+                alt={currentTab.imageAlt}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#F2EADA] to-transparent" />
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[rgba(48,48,48,0.16)] pt-6">
-              <p className="max-w-xs text-xs text-[#5C584F]">
-                Segmentasi K-Means 4 fitur biofisik memiliki silhouette 0,2233
-                dan bersifat eksploratif.
-              </p>
-              <Link href={currentTab.ctaHref} className="btn-drs-primary">
-                {currentTab.ctaLabel}
-              </Link>
+            <div className="flex flex-1 flex-col justify-between p-6 pt-2 md:p-8 md:pt-2">
+              <div>
+                <p className="eyebrow-tag">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#20462B]" />
+                  <span>Profil Terverifikasi</span>
+                </p>
+                <h3 className="mt-2 font-serif text-3xl font-light text-[#303030]">
+                  {currentTab.subtitle}
+                </h3>
+
+                <div className="mt-5 grid grid-cols-2 border-t border-[rgba(48,48,48,0.18)]">
+                  {currentTab.metrics.map((m, i) => (
+                    <div
+                      key={m.k}
+                      className={`border-b border-[rgba(48,48,48,0.18)] py-3.5 ${
+                        i % 2 === 0
+                          ? "border-r border-[rgba(48,48,48,0.18)] pr-3"
+                          : "pl-4"
+                      }`}
+                    >
+                      <p className="text-[11px] uppercase tracking-[0.1em] text-[#5C584F]">
+                        {m.k}
+                      </p>
+                      <p className="mt-1 font-serif text-2xl font-normal text-[#20462B]">
+                        {m.v}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                <p className="max-w-xs text-xs text-[#5C584F]">
+                  Segmentasi K-Means 4 fitur biofisik memiliki silhouette 0,2233
+                  dan bersifat eksploratif.
+                </p>
+                <Link href={currentTab.ctaHref} className="btn-drs-primary">
+                  {currentTab.ctaLabel}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -322,7 +391,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Editorial Crop Rows ("Retreats Within These Walls") */}
+      {/* 5. Editorial Crop Rows with Photographs ("Retreats Within These Walls") */}
       <section className="border-t border-[rgba(48,48,48,0.18)] bg-[#DFD7C9] px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
           <BlurReveal className="text-center">
@@ -341,44 +410,57 @@ export default function HomePage() {
                 key={crop.name}
                 className="grid grid-cols-1 gap-8 border-b border-[rgba(48,48,48,0.2)] py-10 md:grid-cols-12 md:items-center"
               >
-                <div className="md:col-span-7">
-                  <h3 className="font-serif text-3xl font-light text-[#303030] md:text-4xl">
-                    {crop.name}
-                  </h3>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#5C584F]">
-                    {crop.summary}
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <Link
-                      href={`/kalkulator-biaya?komoditas=${encodeURIComponent(
-                        crop.name === "Padi Sawah"
-                          ? "Padi"
-                          : crop.name === "Jagung & Hortikultura"
-                            ? "Jagung"
-                            : crop.name
-                      )}&luas=1`}
-                      className="btn-drs-primary"
-                    >
-                      Hitung RAB
-                    </Link>
-                    <Link href="/analisis-lahan" className="btn-drs-dashed">
-                      Cek Kecocokan
-                    </Link>
+                <div className="flex flex-col justify-between md:col-span-6">
+                  <div>
+                    <h3 className="font-serif text-3xl font-light text-[#303030] md:text-4xl">
+                      {crop.name}
+                    </h3>
+                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#5C584F]">
+                      {crop.summary}
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <Link
+                        href={`/kalkulator-biaya?komoditas=${encodeURIComponent(
+                          crop.name === "Padi Sawah"
+                            ? "Padi"
+                            : crop.name === "Jagung & Hortikultura"
+                              ? "Jagung"
+                              : crop.name
+                        )}&luas=1`}
+                        className="btn-drs-primary"
+                      >
+                        Hitung RAB
+                      </Link>
+                      <Link href="/analisis-lahan" className="btn-drs-dashed">
+                        Cek Kecocokan
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 grid grid-cols-2 border-t border-[rgba(48,48,48,0.18)] pt-4 text-sm">
+                    <div className="pr-4">
+                      <p className="text-xs text-[#5C584F]">Varietas Data</p>
+                      <p className="mt-1 font-medium text-[#303030]">
+                        {crop.variety}
+                      </p>
+                    </div>
+                    <div className="border-l border-[rgba(48,48,48,0.18)] pl-4">
+                      <p className="text-xs text-[#5C584F]">Modal / Hektar</p>
+                      <p className="mt-1 font-medium text-[#20462B]">
+                        {formatRupiah(crop.costPerHa)}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 border-t border-[rgba(48,48,48,0.18)] pt-4 text-sm md:col-span-5">
-                  <div className="pr-4">
-                    <p className="text-xs text-[#5C584F]">Varietas Data</p>
-                    <p className="mt-1 font-medium text-[#303030]">
-                      {crop.variety}
-                    </p>
-                  </div>
-                  <div className="border-l border-[rgba(48,48,48,0.18)] pl-4">
-                    <p className="text-xs text-[#5C584F]">Modal / Hektar</p>
-                    <p className="mt-1 font-medium text-[#20462B]">
-                      {formatRupiah(crop.costPerHa)}
-                    </p>
+                <div className="md:col-span-6">
+                  <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.16)]">
+                    <img
+                      src={crop.image}
+                      alt={crop.imageAlt}
+                      loading="lazy"
+                      className="aspect-[16/10] w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+                    />
                   </div>
                 </div>
               </BlurReveal>
@@ -430,15 +512,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Dark Atmospheric Scrollytelling Band (Lotus-Temple Inspired) */}
-      <section
-        className="relative overflow-hidden bg-[#112617] px-5 py-28 text-[#F2EADA] md:px-10 md:py-36"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 50% 24%, rgba(164, 122, 58, 0.28) 0%, rgba(26, 56, 34, 0.45) 38%, #112617 75%)",
-        }}
-      >
-        <div className="mx-auto max-w-5xl">
+      {/* 7. Dark Atmospheric Scrollytelling Band (Lotus-Temple Inspired Photograph) */}
+      <section className="relative overflow-hidden bg-[#112617] px-5 py-28 text-[#F2EADA] md:px-10 md:py-36">
+        <img
+          src="/images/merapi-amber-band.jpg"
+          alt="Cahaya senja keemasan menembus kabut hutan lereng Merapi"
+          loading="lazy"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-55"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#112617]/80 via-[#112617]/55 to-[#112617]/90"
+        />
+
+        <div className="relative z-10 mx-auto max-w-5xl">
           <BlurReveal className="text-center">
             <p className="eyebrow-tag-light">Transparansi Ilmiah</p>
             <h2 className="mt-4 font-serif text-4xl font-light uppercase leading-tight text-[#F2EADA] md:text-6xl">
@@ -479,7 +566,7 @@ export default function HomePage() {
                 <h3 className="mt-2 font-serif text-3xl font-light text-[#F2EADA]">
                   {beat.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#ADB19F]">
+                <p className="mt-3 text-sm leading-relaxed text-[#F2EADA]/85">
                   {beat.text}
                 </p>
               </BlurReveal>
@@ -488,8 +575,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. Closing Editorial CTA */}
-      <section className="bg-[#DFD7C9] px-5 py-24 text-center md:px-10 md:py-32">
+      {/* 8. Closing Editorial CTA + 2-Card Image Discovery Strip */}
+      <section className="bg-[#DFD7C9] px-5 pt-24 pb-16 text-center md:px-10 md:pt-32">
         <BlurReveal className="mx-auto max-w-xl">
           <h2 className="font-serif text-4xl font-light uppercase leading-[1.08] text-[#303030] md:text-6xl">
             Rencanakan Musim Tanam Dengan Tenang
@@ -507,6 +594,50 @@ export default function HomePage() {
             </Link>
           </div>
         </BlurReveal>
+
+        <div className="mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-4 text-left md:grid-cols-2">
+          <Link
+            href="/peta-kalurahan"
+            className="group relative flex h-64 items-end overflow-hidden rounded-[6px] p-6 text-[#F2EADA] md:h-72"
+          >
+            <img
+              src="/images/segmen-c-palawija.jpg"
+              alt="Eksplorasi peta 5 kalurahan Cangkringan"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#112617]/85 via-[#112617]/25 to-transparent" />
+            <div className="relative z-10">
+              <p className="text-[11px] uppercase tracking-[0.14em] text-[#F2EADA]/80">
+                JELAJAHI
+              </p>
+              <p className="mt-1 font-serif text-4xl font-light uppercase">
+                KALURAHAN
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            href="/kalkulator-biaya"
+            className="group relative flex h-64 items-end overflow-hidden rounded-[6px] p-6 text-[#F2EADA] md:h-72"
+          >
+            <img
+              src="/images/crop-hortikultura.jpg"
+              alt="Kalkulator RAB dan rincian modal 6 komoditas"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#112617]/85 via-[#112617]/25 to-transparent" />
+            <div className="relative z-10">
+              <p className="text-[11px] uppercase tracking-[0.14em] text-[#F2EADA]/80">
+                HITUNG MODAL
+              </p>
+              <p className="mt-1 font-serif text-4xl font-light uppercase">
+                KALKULATOR RAB
+              </p>
+            </div>
+          </Link>
+        </div>
       </section>
     </div>
   );

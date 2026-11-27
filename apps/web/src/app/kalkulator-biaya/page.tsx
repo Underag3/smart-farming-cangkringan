@@ -58,6 +58,13 @@ function KalkulatorBiayaContent() {
       );
   }, [commodity, areaInput, unit, targetYield, useBep]);
 
+  const cropImage =
+    commodity === "Padi"
+      ? "/images/segmen-a-padi.jpg"
+      : commodity === "Salak Pondoh"
+        ? "/images/segmen-b-salak.jpg"
+        : "/images/crop-hortikultura.jpg";
+
   return (
     <div className="bg-[#DFD7C9] px-5 py-12 md:px-10 md:py-16">
       <div className="mx-auto max-w-6xl space-y-12">
@@ -206,7 +213,16 @@ function KalkulatorBiayaContent() {
         {/* Split Output (#20462B Left + #F2EADA Right) */}
         {estimate && (
           <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="flex flex-col justify-between rounded-[6px] bg-[#20462B] p-6 text-[#F2EADA] md:p-8">
+            <div className="flex flex-col justify-between overflow-hidden rounded-[6px] bg-[#20462B] text-[#F2EADA]">
+              <div className="relative h-44 w-full overflow-hidden">
+                <img
+                  src={cropImage}
+                  alt={estimate.commodity}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#20462B] via-[#20462B]/20 to-transparent" />
+              </div>
+              <div className="flex flex-1 flex-col justify-between p-6 pt-2 md:p-8 md:pt-2">
               <div>
                 <p className="eyebrow-tag-light">
                   {estimate.commodity} · Varietas {estimate.variety} ·{" "}
@@ -251,6 +267,7 @@ function KalkulatorBiayaContent() {
                   <Share2 className="h-4 w-4" />
                   <span>Bagikan RAB ke WhatsApp</span>
                 </button>
+              </div>
               </div>
             </div>
 

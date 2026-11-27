@@ -2,9 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function SmoothScrollProvider({
   children,
@@ -12,10 +9,11 @@ export function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const lenisRef = useRef<Lenis | null>(null);
+  const scrollToTopRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    let active = true;
+    let cleanupFn: (() => void) | null = null;
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -24,40 +22,67 @@ export function SmoothScrollProvider({
       return;
     }
 
-    const lenis = new Lenis({
-      lerp: 0.085,
-      smoothWheel: true,
-      wheelMultiplier: 0.95,
-    });
-    lenisRef.current = lenis;
+    async function initSmoothScroll() {
+      const [{ default: Lenis }, { default: gsap }, { ScrollTrigger }] =
+        await Promise.all([
+          import("lenis"),
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
 
-    lenis.on("scroll", ScrollTrigger.update);
+      if (!active) return;
 
-    const onTick = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+      gsap.registerPlugin(ScrollTrigger);
+      const lenis = new Lenis({
+        lerp: 0.085,
+        smoothWheel: true,
+        wheelMultiplier: 0.95,
+      });
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      const onTick = (time: number) => {
+        lenis.raf(time * 1000);
+      };
+      gsap.ticker.add(onTick);
+      gsap.ticker.lagSmoothing(0);
+
+      scrollToTopRef.current = () => {
+        lenis.scrollTo(0, { immediate: true });
+      };
+
+      cleanupFn = () => {
+        scrollToTopRef.current = null;
+        gsap.ticker.remove(onTick);
+        lenis.destroy();
+      };
+    }
+
+    initSmoothScroll().catch(() => {});
 
     return () => {
-      gsap.ticker.remove(onTick);
-      lenis.destroy();
-      lenisRef.current = null;
+      active = false;
+      if (cleanupFn) cleanupFn();
     };
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (!window.location.hash) {
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
+      if (scrollToTopRef.current) {
+        scrollToTopRef.current();
       } else {
         window.scrollTo(0, 0);
       }
     }
-    const id = window.setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 120);
+    const id = window.setTimeout(async () => {
+      try {
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        ScrollTrigger.refresh();
+      } catch {
+        // ignore if not loaded yet
+      }
+    }, 150);
     return () => window.clearTimeout(id);
   }, [pathname]);
 

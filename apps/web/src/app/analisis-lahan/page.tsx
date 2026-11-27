@@ -85,6 +85,21 @@ export default function AnalisisLahanPage() {
     }
   }
 
+  const SEGMENT_IMAGES: Record<string, { src: string; alt: string }> = {
+    A: {
+      src: "/images/segmen-a-padi.jpg",
+      alt: "Ilustrasi zona menengah-netral Cangkringan",
+    },
+    B: {
+      src: "/images/segmen-b-salak.jpg",
+      alt: "Ilustrasi zona lereng atas subur Cangkringan",
+    },
+    C: {
+      src: "/images/segmen-c-palawija.jpg",
+      alt: "Ilustrasi zona lereng bawah vegetasi jarang Cangkringan",
+    },
+  };
+
   return (
     <div className="bg-[#DFD7C9] px-5 py-12 md:px-10 md:py-16">
       <div className="mx-auto max-w-6xl space-y-12">
@@ -286,8 +301,13 @@ export default function AnalisisLahanPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between rounded-[6px] border border-[rgba(48,48,48,0.2)] bg-[#F2EADA] p-6 md:p-8">
-                <div>
+              <div className="flex flex-col justify-between overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.2)] bg-[#F2EADA]">
+                <img
+                  src={SEGMENT_IMAGES[result.exploratory_segment.id]?.src || "/images/hero-merapi.jpg"}
+                  alt={SEGMENT_IMAGES[result.exploratory_segment.id]?.alt || "Lahan Cangkringan"}
+                  className="h-48 w-full object-cover"
+                />
+                <div className="p-6 md:p-8">
                   <p className="eyebrow-tag">Pusat Klaster &amp; Diagnosis Tanah</p>
                   <div className="mt-4 grid grid-cols-2 border-t border-[rgba(48,48,48,0.18)]">
                     {[
@@ -311,8 +331,6 @@ export default function AnalisisLahanPage() {
                       </div>
                     ))}
                   </div>
-                </div>
-
                 <div className="mt-6 space-y-3">
                   {result.soil_diagnosis.map((diag) => (
                     <div
@@ -327,6 +345,7 @@ export default function AnalisisLahanPage() {
                       </p>
                     </div>
                   ))}
+                </div>
                 </div>
               </div>
             </section>

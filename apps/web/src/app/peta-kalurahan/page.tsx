@@ -100,6 +100,14 @@ export default function PetaKalurahanPage() {
           </p>
         </BlurReveal>
 
+        <div className="overflow-hidden rounded-[6px] border border-[rgba(48,48,48,0.18)]">
+          <img
+            src="/images/hero-merapi.jpg"
+            alt="Lanskap Kecamatan Cangkringan berlatar Gunung Merapi"
+            className="h-48 w-full object-cover md:h-64"
+          />
+        </div>
+
         {/* Split Panel Interactive Region + SVG Map */}
         <section className="grid grid-cols-1 gap-4 md:grid-cols-12">
           {/* Left Dark Forest Green Region Selector */}
