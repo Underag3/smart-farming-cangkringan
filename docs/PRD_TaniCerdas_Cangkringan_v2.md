@@ -424,20 +424,20 @@ smart-farming-cangkringan-ml/
 
 ---
 
-## 8. Design System & Pengalaman Pengguna (Mobile-First)
+## 8. Design System & Pengalaman Pengguna (Editorial Botanical + Lenis & GSAP)
 
-* **Prinsip Utama:** Satu tugas utama per layar, kecepatan muat tinggi pada jaringan lambat, keterbacaan di luar ruangan (kontras tinggi di bawah sinar matahari).
+* **Prinsip Utama:** Gaya *editorial botanical calm* yang tenang dan berwibawa — memadukan warna batu/linen hangat dan hijau hutan Merapi dengan pembatas garis arsitektural `1px`, *smooth scrolling* (Lenis), serta animasi *blur-reveal* (GSAP ScrollTrigger) dengan dukungan `prefers-reduced-motion`.
 * **Palet Warna:**
-  * Primary Leaf Green: `#2E7D32` (aksi utama, tab aktif)
-  * Deep Forest Green: `#1B5E20` (hover & header aksen)
-  * Canvas Background: `#F7F9F4`
-  * Surface Card: `#FFFFFF` (border `#DDE5D8`)
-  * Text Primary / Secondary: `#1C2B1A` / `#5A6B57`
-  * Soil Earth Accent: `#8D6E63`
-  * Warning / Guardrail Banner: teks `#92400E` di latar `#FEF3C7`
-  * Error Input: `#B91C1C` (khusus validasi form gagal)
-* **Tipografi:** `Plus Jakarta Sans` (fallback `Inter`, `system-ui`), judul halaman `22–24px` bold, judul kartu `18px` bold, teks isi `16px` (`line-height: 1.6`), metadata/sumber minimal `14px`.
-* **Navigasi Mobile:** *Sticky bottom navigation bar* 5 ikon + label jelas (`Chat`, `Cek Lahan`, `Biaya`, `Kalurahan`, `Data`) dengan area sentuh minimal `48x48px`.
+  * Warm Ivory Cream (Header, kartu data terstruktur, teks atas gelap): `#F2EADA`
+  * Warm Stone Linen (Kanvas utama halaman): `#DFD7C9`
+  * Primary Forest Green (Split panel interaktif, tombol primer, menu bulat mobile): `#20462B`
+  * Deep Pine Accent (Sel CTA header & hover tombol primer): `#1A3822`
+  * Obsidian Pine (Footer penuh, mobile menu drawer, dark scrollytelling band): `#112617`
+  * Muted Sage Surface & Ink (Input gelap & teks sekunder di atas gelap): `#2F4032` / `#ADB19F`
+  * Soft Charcoal Ink & Muted Stone: `#303030` / `#5C584F`
+  * Warning / Guardrail Banner: teks `#8D6E63`/`#303030` dengan bingkai `1px dashed` di latar `#F2EADA`
+* **Tipografi:** `Cormorant Garamond` (display serif editorial untuk judul besar & kutipan naratif) dipasangkan dengan `Plus Jakarta Sans` (UI, angka RAB, formulir, dan teks chat minimal `16px`).
+* **Pola Interaksi Khas:** Tombol aksi ganda (solid `#20462B` vs `1px dashed` outline), header ber-sekat vertikal `1px` di desktop, mobile drawer `#112617` bernomor, split panel 50/50 interaktif dengan ikon panah aktif `→`, dan footer dengan kotak tanya cepat serta sitemap bernomor `1–5`.
 
 ---
 

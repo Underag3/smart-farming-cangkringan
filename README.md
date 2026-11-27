@@ -32,7 +32,7 @@ Platform konsultasi budidaya, analisis kesesuaian lahan hibrida, kalkulator RAB 
 ```text
 ├── apps/
 │   ├── api/                 # Backend FastAPI, router REST /api/v1, artifacts model, SQLite anonim
-│   └── web/                 # Frontend Next.js 14 App Router (TypeScript + Tailwind CSS)
+│   └── web/                 # Frontend Next.js 14 App Router (Tailwind CSS, Lenis, GSAP)
 ├── packages/
 │   ├── agronomy/            # Mesin kesesuaian komoditas, OOD guard, dan kalkulator RAB/BEP
 │   └── rag/                 # Basis pengetahuan markdown, hybrid retriever, dan tool-calling
