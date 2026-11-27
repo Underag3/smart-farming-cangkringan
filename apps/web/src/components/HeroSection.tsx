@@ -61,11 +61,11 @@ export function HeroSection() {
 
   return (
     <section className="sticky top-[56px] z-0 h-[calc(100vh-56px)] w-full overflow-hidden bg-[#112617] text-[#F2EADA] md:top-[50px] md:h-[calc(100vh-50px)]">
-      {/* Moving Landscape Layer */}
+      {/* Moving Landscape Layer (oversized vertically to prevent top gap during parallax) */}
       <div
         ref={mediaRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-x-0 -top-[12%] -bottom-[12%]"
       >
         <img
           src="/images/hero-merapi.jpg"
