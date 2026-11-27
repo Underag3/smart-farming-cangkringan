@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ShieldCheck } from "lucide-react";
+import { BlurReveal } from "@/components/BlurReveal";
 import { DisclaimerBanner } from "@/components/DisclaimerBanner";
 import { api } from "@/lib/api";
 import type { AuditResponse } from "@/lib/types";
@@ -16,7 +17,7 @@ export default function MetodologiPage() {
 
   if (!audit) {
     return (
-      <div className="rounded-2xl border border-line bg-white p-6 text-sm text-ink-muted">
+      <div className="bg-[#DFD7C9] px-5 py-16 text-sm text-[#5C584F]">
         Memuat ringkasan audit data &amp; hasil evaluasi model...
       </div>
     );
@@ -25,138 +26,121 @@ export default function MetodologiPage() {
   const { clustering, audit_findings, pest_summary } = audit;
 
   return (
-    <div className="space-y-5">
-      <section className="rounded-2xl border border-line bg-white p-5 shadow-sm">
-        <div className="flex items-center gap-2 text-leaf-dark">
-          <ShieldCheck className="h-6 w-6" />
-          <h1 className="text-xl font-bold text-ink md:text-2xl">
-            Audit Data, Metodologi Model &amp; Batasan
+    <div className="bg-[#DFD7C9] px-5 py-12 md:px-10 md:py-16">
+      <div className="mx-auto max-w-6xl space-y-12">
+        <BlurReveal immediate>
+          <p className="eyebrow-tag">
+            <ShieldCheck className="h-3.5 w-3.5 text-[#20462B]" />
+            <span>Transparansi Ilmiah &amp; Audit Dataset</span>
+          </p>
+          <h1 className="mt-3 font-serif text-4xl font-light uppercase leading-tight text-[#303030] md:text-6xl">
+            Metodologi &amp; Batasan Model
           </h1>
-        </div>
-        <p className="mt-2 text-sm text-ink-muted">
-          Halaman ini menyajikan bukti empiris mengapa sebagian fitur diaktifkan
-          dan sebagian klaim (prediksi hasil panen serta hitungan pendapatan
-          dari Price_Data) ditolak secara transparan.
-        </p>
-      </section>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#5C584F]">
+            Dokumentasi terbuka mengenai hasil audit seluruh 9 sheet dataset
+            sumber, alasan pembatasan klaim ML, serta pembanding resmi BPS dan
+            Badan Pangan Nasional.
+          </p>
+        </BlurReveal>
 
-      <section className="rounded-2xl border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-bold text-ink">
-          1. Peningkatan Segmentasi Biofisik (4 Fitur vs 5 Fitur)
-        </h2>
-        <p className="mt-1 text-sm text-ink-muted">
-          Pada prototipe awal, luas lahan (<code>area_ha</code>) ikut dimasukkan
-          ke K-Means sehingga mengaburkan kemiripan biofisik tanah. Setelah{" "}
-          <code>area_ha</code> dipisahkan ke Kalkulator RAB, kualitas klaster
-          meningkat:
-        </p>
-        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-line bg-canvas p-3.5 text-sm">
-            <p className="text-xs text-ink-muted">Model Lama (5 Fitur + Luas)</p>
-            <p className="mt-1 text-xl font-bold text-ink-muted">
-              Silhouette {clustering.silhouette_5feat_legacy}
-            </p>
-          </div>
-          <div className="rounded-xl border border-green-200 bg-leaf-soft p-3.5 text-sm">
-            <p className="text-xs text-leaf-dark">
-              Model v2.0 (4 Fitur Biofisik Murni)
-            </p>
-            <p className="mt-1 text-xl font-bold text-leaf-dark">
+        {/* 3-Column Architectural Grid */}
+        <section className="grid grid-cols-1 border-t border-b border-[rgba(48,48,48,0.2)] md:grid-cols-3">
+          <div className="border-b border-[rgba(48,48,48,0.2)] py-7 md:border-b-0 md:border-r md:pr-6">
+            <p className="eyebrow-tag">1. SEGMENTASI BIOFISIK</p>
+            <h2 className="mt-2 font-serif text-3xl font-light text-[#20462B]">
               Silhouette {clustering.silhouette_4feat}
+            </h2>
+            <p className="mt-3 text-sm text-[#5C584F]">
+              Naik +32% dari baseline 5 fitur ({clustering.silhouette_5feat_legacy})
+              setelah <code>area_ha</code> dipisahkan ke Kalkulator RAB. Tetap
+              berstatus eksploratif.
             </p>
           </div>
-        </div>
-      </section>
 
-      <section className="rounded-2xl border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-bold text-ink">
-          2. Mengapa Prediksi Hasil Panen Ditolak?
-        </h2>
-        <p className="mt-1 text-sm text-ink-muted">
-          Evaluasi pada <code>ML_Dataset</code> (
-          {audit_findings.yield_prediction_rejection.ml_rows} baris,{" "}
-          {audit_findings.yield_prediction_rejection.date_min} s.d.{" "}
-          {audit_findings.yield_prediction_rejection.date_max}, rata-rata yield{" "}
-          {audit_findings.yield_prediction_rejection.ml_yield_mean_ton_ha} t/ha)
-          menunjukkan R² negatif:
-        </p>
-        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 text-sm">
-          <div className="rounded-xl border border-line bg-canvas p-3.5">
-            <p className="font-bold">Linear Regression</p>
-            <p className="text-ink-muted">
-              R² Uji:{" "}
-              <strong>
-                {audit_findings.yield_prediction_rejection.linear_regression.r2_test}
+          <div className="border-b border-[rgba(48,48,48,0.2)] py-7 md:border-b-0 md:border-r md:px-6">
+            <p className="eyebrow-tag">2. PREDIKSI PANEN DITOLAK</p>
+            <h2 className="mt-2 font-serif text-3xl font-light text-[#303030]">
+              R² {audit_findings.yield_prediction_rejection.linear_regression.r2_test}{" "}
+              / {audit_findings.yield_prediction_rejection.random_forest.r2_test}
+            </h2>
+            <p className="mt-3 text-sm text-[#5C584F]">
+              Uji pada {audit_findings.yield_prediction_rejection.ml_rows} baris{" "}
+              <code>ML_Dataset</code> lebih buruk dari menebak rata-rata (
+              {audit_findings.yield_prediction_rejection.ml_yield_mean_ton_ha}{" "}
+              t/ha). Fitur prediksi panen dilarang.
+            </p>
+          </div>
+
+          <div className="py-7 md:pl-6">
+            <p className="eyebrow-tag">3. HARGA SIMULASI DIBLOKIR</p>
+            <h2 className="mt-2 font-serif text-3xl font-light text-[#303030]">
+              Acuan BPS 2025
+            </h2>
+            <p className="mt-3 text-sm text-[#5C584F]">
+              <code>Price_Data</code> (
+              {formatRupiah(audit_findings.price_data_rejection.overall_min_rp_kg)}
+              –{formatRupiah(audit_findings.price_data_rejection.overall_max_rp_kg)}
+              /kg) tidak dipakai. Pembanding memakai HPP GKP{" "}
+              {formatRupiah(audit_findings.official_bps_benchmarks.hpp_gkp_rp_kg)}
+              /kg &amp; Gabah{" "}
+              {formatRupiah(
+                audit_findings.official_bps_benchmarks
+                  .rata_rata_harga_gabah_2025_rp_kg
+              )}
+              /kg.
+            </p>
+          </div>
+        </section>
+
+        {/* Detailed Audit List */}
+        <section className="rounded-[6px] border border-[rgba(48,48,48,0.2)] bg-[#F2EADA] p-6 md:p-8">
+          <h2 className="font-serif text-2xl font-light text-[#303030] md:text-3xl">
+            Temuan Detail Integritas Dataset
+          </h2>
+          <div className="mt-4 divide-y divide-[rgba(48,48,48,0.16)] text-sm text-[#5C584F]">
+            <div className="py-3.5">
+              <strong className="text-[#303030]">
+                Ketidakcocokan Luas Tanam vs Luas Panen (
+                {audit_findings.planting_harvest.total_rows} baris):
               </strong>{" "}
-              · RMSE:{" "}
-              {audit_findings.yield_prediction_rejection.linear_regression.rmse_test}{" "}
-              t/ha
-            </p>
-          </div>
-          <div className="rounded-xl border border-line bg-canvas p-3.5">
-            <p className="font-bold">Random Forest Regressor</p>
-            <p className="text-ink-muted">
-              R² Uji:{" "}
+              Ketidakcocokan eksak ditemukan pada{" "}
               <strong>
-                {audit_findings.yield_prediction_rejection.random_forest.r2_test}
+                {audit_findings.planting_harvest.area_mismatch_exact_count} baris
               </strong>{" "}
-              · RMSE:{" "}
-              {audit_findings.yield_prediction_rejection.random_forest.rmse_test}{" "}
-              t/ha
-            </p>
+              ({audit_findings.planting_harvest.area_mismatch_gt_001_count}{" "}
+              baris dengan selisih &gt; 0,01 ha).
+            </div>
+            <div className="py-3.5">
+              <strong className="text-[#303030]">
+                Deteksi Anomali Isolation Forest:
+              </strong>{" "}
+              Menandai{" "}
+              <strong>
+                {audit_findings.planting_harvest.isolation_forest_anomalies}{" "}
+                catatan panen
+              </strong>{" "}
+              dengan rata-rata yield{" "}
+              {audit_findings.planting_harvest.isolation_forest_anom_yield_mean}{" "}
+              t/ha vs normal{" "}
+              {audit_findings.planting_harvest.isolation_forest_norm_yield_mean}{" "}
+              t/ha.
+            </div>
+            <div className="py-3.5">
+              <strong className="text-[#303030]">
+                Anomali Pencatatan Hama ({pest_summary.total_records} baris):
+              </strong>{" "}
+              Terdapat {pest_summary.tidak_ada_total} baris berlabel{" "}
+              <code>Tidak Ada</code> hama yang tetap memiliki status severity (
+              {Object.entries(pest_summary.tidak_ada_by_severity)
+                .map(([k, v]) => `${v} ${k}`)
+                .join(", ")}
+              ).
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="rounded-2xl border border-line bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-bold text-ink">
-          3. Temuan Integritas Dataset Sumber
-        </h2>
-        <ul className="mt-2 space-y-2 text-sm text-ink-muted">
-          <li>
-            • <strong>Price_Data ({audit_findings.price_data_rejection.total_rows} baris):</strong>{" "}
-            Rentang harga{" "}
-            {formatRupiah(audit_findings.price_data_rejection.overall_min_rp_kg)}–
-            {formatRupiah(audit_findings.price_data_rejection.overall_max_rp_kg)}
-            /kg (rata-rata Rp 41.827–Rp 52.082/kg), tidak realistis untuk komoditas
-            pangan sehingga diganti acuan resmi BPS/Bapanas (HPP GKP{" "}
-            {formatRupiah(audit_findings.official_bps_benchmarks.hpp_gkp_rp_kg)}/kg,
-            harga gabah 2025{" "}
-            {formatRupiah(
-              audit_findings.official_bps_benchmarks.rata_rata_harga_gabah_2025_rp_kg
-            )}
-            /kg).
-          </li>
-          <li>
-            • <strong>Planting vs Harvest ({audit_findings.planting_harvest.total_rows} baris):</strong>{" "}
-            Ketidakcocokan eksak luas tanam dan luas panen ditemukan pada{" "}
-            <strong>
-              {audit_findings.planting_harvest.area_mismatch_exact_count} baris
-            </strong>{" "}
-            ({audit_findings.planting_harvest.area_mismatch_gt_001_count} baris
-            dengan toleransi &gt; 0,01 ha). Isolation Forest menandai{" "}
-            <strong>
-              {audit_findings.planting_harvest.isolation_forest_anomalies} anomali
-            </strong>{" "}
-            panen (rata-rata yield{" "}
-            {audit_findings.planting_harvest.isolation_forest_anom_yield_mean}{" "}
-            t/ha vs normal{" "}
-            {audit_findings.planting_harvest.isolation_forest_norm_yield_mean}{" "}
-            t/ha).
-          </li>
-          <li>
-            • <strong>Pest_Disease_Data ({pest_summary.total_records} baris):</strong>{" "}
-            Terdapat {pest_summary.tidak_ada_total} baris berlabel{" "}
-            <code>Tidak Ada</code> yang tetap mencatat severity (
-            {Object.entries(pest_summary.tidak_ada_by_severity)
-              .map(([k, v]) => `${v} ${k}`)
-              .join(", ")}
-            ).
-          </li>
-        </ul>
-      </section>
-
-      <DisclaimerBanner message={clustering.disclaimer} />
+        <DisclaimerBanner message={clustering.disclaimer} />
+      </div>
     </div>
   );
 }
